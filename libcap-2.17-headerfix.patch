@@ -1,0 +1,14 @@
+--- libcap-2.17/libcap/include/sys/capability.h.orig	2009-08-27 13:01:01.000000000 +0800
++++ libcap-2.17/libcap/include/sys/capability.h	2009-12-24 11:07:43.000000000 +0800
+@@ -29,6 +29,11 @@ extern "C" {
+ #ifndef __user
+ #define __user
+ #endif
++
++#define _ASM_X86_SIGCONTEXT_H
++#define _ASM_POWERPC_SIGCONTEXT_H
++#define _SPARC_SIGCONTEXT_H
++
+ #include <linux/capability.h>
+ 
+ /*

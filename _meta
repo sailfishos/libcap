@@ -1,0 +1,8 @@
+<package project="Mer:Trunk:Base" name="libcap">
+  <title>Library for getting and setting POSIX.1e capabilities</title>
+  <description>libcap is a library for getting and setting POSIX.1e (formerly POSIX 6)
+draft 15 capabilities.
+
+</description>
+  <url>http://ftp.kernel.org/pub/linux/libs/security/linux-privs/kernel-2.6/</url>
+</package>
