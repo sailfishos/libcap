@@ -1,3 +1,9 @@
+* Tue May 21 2013 Marko Saukko <marko.saukko@jollamobile.com> - 2.22
+- Update to version 2.22
+- Move libraries under /usr/lib/. Contributes to MER#174
+- Added: libcap-2.22-buildflags.patch, libcap-2.22-signed-sizeof-compare.patch
+- Dropped: libcap-2.17-headerfix.patch
+
 * Mon Aug 09 2010 Martin Xu <martin.xu@intel.com> - 2.19
 - Upgrade to 2.19
 
