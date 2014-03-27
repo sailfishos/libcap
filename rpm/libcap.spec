@@ -1,12 +1,11 @@
 Name: libcap
-Version: 2.22
+Version: 2.24
 Release: 1
 Summary: Library for getting and setting POSIX.1e capabilities
-Source: http://mirror.linux.org.au/linux/libs/security/linux-privs/libcap2/%{name}-%{version}.tar.bz2
+Source: %{name}-%{version}.tar.bz2
 Patch0: libcap-2.22-buildflags.patch
-Patch1: libcap-2.22-signed-sizeof-compare.patch
 
-URL: http://ftp.kernel.org/pub/linux/libs/security/linux-privs/kernel-2.6/
+URL: https://git.kernel.org/cgit/linux/kernel/git/morgan/libcap.git/
 License: LGPLv2+
 Group: System/Libraries
 BuildRequires: libattr-devel pam-devel
@@ -30,9 +29,8 @@ Install libcap-devel if you want to develop or compile applications using
 libcap.
 
 %prep
-%setup -q
+%setup -q -n %{name}-%{version}/libcap
 %patch0 -p1
-%patch1 -p1
 
 %build
 # libcap can not be build with _smp_mflags:
@@ -42,6 +40,7 @@ make PREFIX=%{_prefix} LIBDIR=%{_libdir} SBINDIR=%{_sbindir} \
 %install
 rm -rf ${RPM_BUILD_ROOT}
 make install RAISE_SETFCAP=no \
+             PKGCONFIGDIR=${RPM_BUILD_ROOT}/%{_libdir}/pkgconfig/ \
              DESTDIR=${RPM_BUILD_ROOT} \
              LIBDIR=${RPM_BUILD_ROOT}/%{_libdir} \
              SBINDIR=${RPM_BUILD_ROOT}/%{_sbindir} \
@@ -73,4 +72,5 @@ chmod +x ${RPM_BUILD_ROOT}/%{_libdir}/*.so.*
 %{_libdir}/*.so
 %{_mandir}/man1/*
 %{_mandir}/man3/*
+%{_libdir}/pkgconfig/libcap.pc
 
