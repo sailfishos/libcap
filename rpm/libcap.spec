@@ -28,6 +28,14 @@ draft 15 capabilities.
 Install libcap-devel if you want to develop or compile applications using
 libcap.
 
+%package doc
+Summary:   Documentation for %{name}
+Group:     Documentation
+Requires:  %{name} = %{version}-%{release}
+
+%description doc
+Man pages for %{name}.
+
 %prep
 %setup -q -n %{name}-%{version}/libcap
 %patch0 -p1
@@ -55,22 +63,27 @@ rm ${RPM_BUILD_ROOT}/%{_libdir}/libcap.a
 
 chmod +x ${RPM_BUILD_ROOT}/%{_libdir}/*.so.*
 
+mkdir -p ${RPM_BUILD_ROOT}%{_docdir}/%{name}-%{version}
+install -m0644 -t ${RPM_BUILD_ROOT}%{_docdir}/%{name}-%{version} \
+        doc/capability.notes
+
 %post -p /sbin/ldconfig
 %postun -p /sbin/ldconfig
 
 %files
 %defattr(-,root,root,-)
+%license License
 %{_libdir}/*.so.*
 %{_sbindir}/*
-%{_mandir}/man8/*
 %{_libdir}/security/pam_cap.so
-%doc doc/capability.notes License
 
 %files devel
 %defattr(-,root,root,-)
 %{_includedir}/*
 %{_libdir}/*.so
-%{_mandir}/man1/*
-%{_mandir}/man3/*
 %{_libdir}/pkgconfig/libcap.pc
 
+%files doc
+%defattr(-,root,root,-)
+%{_mandir}/man*/*
+%{_docdir}/%{name}-%{version}
