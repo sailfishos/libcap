@@ -7,7 +7,6 @@ Patch0: libcap-2.25-buildflags.patch
 
 URL: https://github.com/sailfishos/libcap
 License: LGPLv2+
-Group: System/Libraries
 BuildRequires: libattr-devel pam-devel
 
 %description
@@ -16,7 +15,6 @@ draft 15 capabilities.
 
 %package devel
 Summary: Development files for libcap
-Group: Development/Libraries
 Requires: %{name} = %{version}-%{release}
 
 %description devel
@@ -30,7 +28,6 @@ libcap.
 
 %package doc
 Summary:   Documentation for %{name}
-Group:     Documentation
 Requires:  %{name} = %{version}-%{release}
 
 %description doc
