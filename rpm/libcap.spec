@@ -5,9 +5,8 @@ Summary: Library for getting and setting POSIX.1e capabilities
 Source: %{name}-%{version}.tar.bz2
 Patch0: libcap-2.25-buildflags.patch
 
-URL: https://git.kernel.org/cgit/linux/kernel/git/morgan/libcap.git/
+URL: https://github.com/sailfishos/libcap
 License: LGPLv2+
-Group: System/Libraries
 BuildRequires: libattr-devel pam-devel
 
 %description
@@ -16,7 +15,6 @@ draft 15 capabilities.
 
 %package devel
 Summary: Development files for libcap
-Group: Development/Libraries
 Requires: %{name} = %{version}-%{release}
 
 %description devel
@@ -30,7 +28,6 @@ libcap.
 
 %package doc
 Summary:   Documentation for %{name}
-Group:     Documentation
 Requires:  %{name} = %{version}-%{release}
 
 %description doc
