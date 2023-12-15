@@ -1,12 +1,11 @@
 Name: libcap
-Version: 2.25
+Version: 2.69
 Release: 1
 Summary: Library for getting and setting POSIX.1e capabilities
 Source: %{name}-%{version}.tar.bz2
-Patch0: libcap-2.25-buildflags.patch
 
 URL: https://github.com/sailfishos/libcap
-License: LGPLv2+
+License: BSD OR GPLv2
 BuildRequires: libattr-devel pam-devel
 
 %description
@@ -31,16 +30,13 @@ Summary:   Documentation for %{name}
 Requires:  %{name} = %{version}-%{release}
 
 %description doc
-Man pages for %{name}.
+Documentation for %{name}.
 
 %prep
-%setup -q -n %{name}-%{version}/libcap
-%patch0 -p1
+%autosetup -n %{name}-%{version}/libcap
 
 %build
-# libcap can not be build with _smp_mflags:
-make PREFIX=%{_prefix} LIBDIR=%{_libdir} SBINDIR=%{_sbindir} \
-     INCDIR=%{_includedir} MANDIR=%{_mandir}
+%make_build prefix=%{_prefix} lib=%{_lib} all
 
 %install
 rm -rf %{buildroot}
@@ -50,17 +46,18 @@ make install RAISE_SETFCAP=no \
              LIBDIR=%{_libdir} \
              SBINDIR=%{_sbindir} \
              INCDIR=%{_includedir} \
-             MANDIR=%{_mandir}/ \
-             COPTFLAG="$RPM_OPT_FLAGS"
+             MANDIR=%{_mandir}
+
 mkdir -p %{buildroot}%{_mandir}/man{2,3,8}
 mv -f doc/*.3 %{buildroot}%{_mandir}/man3/
 
 # remove static lib
 rm ${RPM_BUILD_ROOT}/%{_libdir}/libcap.a
+rm ${RPM_BUILD_ROOT}/%{_libdir}/libpsx.a
 
 mkdir -p %{buildroot}%{_docdir}/%{name}-%{version}
 install -m0644 -t %{buildroot}%{_docdir}/%{name}-%{version} \
-        doc/capability.notes
+        doc/capability.md
 
 %post -p /sbin/ldconfig
 %postun -p /sbin/ldconfig
@@ -77,6 +74,7 @@ install -m0644 -t %{buildroot}%{_docdir}/%{name}-%{version} \
 %{_includedir}/*
 %{_libdir}/*.so
 %{_libdir}/pkgconfig/libcap.pc
+%{_libdir}/pkgconfig/libpsx.pc
 
 %files doc
 %defattr(-,root,root,-)
