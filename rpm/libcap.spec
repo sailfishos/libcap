@@ -1,12 +1,12 @@
 Name: libcap
-Version: 2.69
+Version: 2.73
 Release: 1
 Summary: Library for getting and setting POSIX.1e capabilities
 Source: %{name}-%{version}.tar.bz2
 
 URL: https://github.com/sailfishos/libcap
 License: BSD OR GPLv2
-BuildRequires: libattr-devel pam-devel
+BuildRequires: pam-devel
 
 %description
 libcap is a library for getting and setting POSIX.1e (formerly POSIX 6)
@@ -39,7 +39,6 @@ Documentation for %{name}.
 %make_build prefix=%{_prefix} lib=%{_lib} all
 
 %install
-rm -rf %{buildroot}
 make install RAISE_SETFCAP=no \
              PKGCONFIGDIR=%{_libdir}/pkgconfig/ \
              DESTDIR=%{buildroot} \
@@ -63,20 +62,17 @@ install -m0644 -t %{buildroot}%{_docdir}/%{name}-%{version} \
 %postun -p /sbin/ldconfig
 
 %files
-%defattr(-,root,root,-)
 %license License
 %{_libdir}/*.so.*
 %{_sbindir}/*
 %{_libdir}/security/pam_cap.so
 
 %files devel
-%defattr(-,root,root,-)
 %{_includedir}/*
 %{_libdir}/*.so
 %{_libdir}/pkgconfig/libcap.pc
 %{_libdir}/pkgconfig/libpsx.pc
 
 %files doc
-%defattr(-,root,root,-)
 %{_mandir}/man*/*
 %{_docdir}/%{name}-%{version}
