@@ -1,5 +1,5 @@
 Name: libcap
-Version: 2.74
+Version: 2.78
 Release: 1
 Summary: Library for getting and setting POSIX.1e capabilities
 Source: %{name}-%{version}.tar.bz2
